@@ -4,7 +4,7 @@ const port = 5000;
 const { v4: uuidv4 } = require('uuid');
 
 app.get('*', (req, res) => {
-    res.send("hello from the other side.")
+    res.send("hello from the other side changed.")
     console.log("response sent to client");
 });
 

@@ -1,12 +1,13 @@
-This project is created to create a socket connection between two servers. 
-After creating the socket connection between two servers 
-1. server 
-2. client
+This is a reverse proxy implementation. Using this project one can expose locally running web application to internet without having a public/static ip address to his local machine. But we need a remote server. 
 
-We can send a http request to the server and then this server will send the http data to the client (which is also a backend server) client will create http request based on the provided payload and request the target server and recieve the response and return to the original server as data through the socket connection. 
+Idea : 
 
-This setup can be used to execute some web services in the local server and with a remote server we can use the local web service. 
+A socket server will be deployed to a remote server(this remote server has a public IP). Client server will be deployed at our local machine. When starting up both server and client, client application will create a socket tunnel. When remote server gets a requesty it will encode the request with all the details and send it to the client machine as a string. Client server will recieve the request and prepare a http request according to the request string and get response from locally running services, the recieved responses will be communicated back with server application. Server application will send the response to users.
 
-Example usage is 
 
-Lets say your are developing a webservice in your local laptop. There are some set of tests on a thrid party tester you need to run on your webservices but you dont have a public ip enabled for your local machine. Now its easy if you can test your local code in terms of debugging purposes. But without public ip a thrid party application can't make any requests to your local server. Using this project we create a socket between a remote server and local machine. Now you just need to point the remote server to the thrid party testing platform. That will call the remote server, then this remote server will send the data to the local client through the socket connection. Then this local client make a http request to locally running web service and return response. Then it will send the response back to remote server. Then this remote server will prepare the response and send it back to the thrid party tester.
+Example usage of this program : 
+
+Lets say you are developing a webservice in your local machine and you dont have a public/static IP attached to your machine. If you have a remote server you can use this program to expose your locally running webservices to internet by deployi8ng client program to the local machine and server program to the remote machine. 
+
+
+After implementing this program, I ve found that theres a similar and more robust software, we can use: Have a look at https://ngrok.com/
